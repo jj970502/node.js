@@ -1,0 +1,75 @@
+---number---
+console.log(1+1);
+console.log(3-1);
+console.log(3*3);
+console.log(12/3);
+//console.log(); = print와 같은 개념;
+---
+---string---
+console.log('1'+'1');
+console.log('mynamwisnasdijaok'.length);
+---
+---variable---
+var a = 1;
+console.log(a);
+a = 2;
+console.log(a);
+// 1 = 2; comment
+---
+---variable2---
+var names = "ryan";
+var letter = 'Lorem' +names+ 'ipsum dolor sit amet, consectetur adipisicing' +names+ 'elit, sed do eiusmod tempor' +names+ 'incididunt ut labore et dolore magna aliqua. '+names+' Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat' +names+ '.';
+console.log(letter);
+---
+---template---
+var names = "ryan";
+// string literals
+var letter = 'Lorem' +names+'\n\
+\n\ipsum dolor sit amet, consectetur adipisicing' +names+ 'elit, sed do eiusmod tempor' +names+ 'incididunt ut labore et dolore magna aliqua. '+names+' Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat' +names+ '.';
+
+
+//template literals : 리터럴(literal)이란 소스 코드의 고정된 값을 나타내는 표기법이다. 
+//그냥 줄바꾸기 하면 그대로 줄바꿈 됨;
+var letter = `dear ${names} 
+
+lorem is sum dolor sit amet, consectetur adipisicing ${names} elit, sed do eiusmod tempor ${names} incididunt ut labore et dolore magna aliqua. ${names} Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat ${names}`;
+console.log(letter);
+//`` 템플릿 리터럴 시작과 끝을 나타내는 코드;
+// 템플릿 리터럴 안에서는 ${}로 변수의 값을 나타낼 수 있다.
+// ${1+1} 이런것도 2로 출력됨; 즉 연산이 이루어진다.
+---
+---url---
+http://opentutorials.org:3000/main?id=HTML&page=12
+*
+http = protocol
+opentutorials.org = host(domain)
+3000 = port
+main = path
+id=HTML&page=12 = query string
+*
+---
+---Node.js에서 URL을 통해서 입력된 값을 사용하는 방법---
+var http = require('http');
+var fs = require('fs');
+var url = require('url');
+
+var app = http.createServer(function(request,response){
+    var _url = request.url;
+    var queryData = url.parse(_url, true).query;
+    console.log(queryData.id)
+    if(_url == '/'){
+      _url = '/index.html';
+    }
+    if(_url == '/favicon.ico'){
+        response.writeHead(404);
+        response.end();
+        return;
+    }
+    response.writeHead(200);
+    console.log(__dirname + _url);
+    response.end(queryData.id); // 이름
+ 
+});
+app.listen(3000);
+--- // 살짝 헷갈린당
+
